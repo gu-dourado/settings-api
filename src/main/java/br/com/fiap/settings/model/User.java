@@ -15,7 +15,7 @@ public class User {
     @Id
     private Long id;
 
-    private String name, mailAdress, password;
+    private String name, mailAddress, password;
     private Preferences preferences;
     private List<Mail> mails;
 }
