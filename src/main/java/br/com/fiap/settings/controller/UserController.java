@@ -3,6 +3,7 @@ package br.com.fiap.settings.controller;
 import br.com.fiap.settings.model.Mail;
 import br.com.fiap.settings.model.Preferences;
 import br.com.fiap.settings.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,6 @@ public class UserController {
         return null;
     }
 
-    // oi
     @GetMapping("/{userId}/mails")
     @ResponseStatus(HttpStatus.OK)
     public List<Mail> getMails(@PathVariable Long id) {
