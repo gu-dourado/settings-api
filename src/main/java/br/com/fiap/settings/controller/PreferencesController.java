@@ -7,30 +7,30 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 
-@RequestMapping("")
+@RequestMapping("/preferences")
 
 public class PreferencesController {
 
-    @GetMapping("/preferences/{preferencesId}")
+    @GetMapping("/{preferencesId}")
     @ResponseStatus(HttpStatus.OK)
     public Preferences getPreferences(@PathVariable Long id) {
         return null;
     }
 
-    @PostMapping("/preferences")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Preferences registerPreferences(@RequestBody Preferences preferences) {
         return null;
     }
 
-    @DeleteMapping("/preferences/{preferencesId}")
+    @DeleteMapping("/{preferencesId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePreferences(@PathVariable Long id) {
     }
 
-    @PutMapping("/preferences")
+    @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public User updatePreferences(@RequestBody Preferences preferences) {
+    public Preferences updatePreferences(@RequestBody Preferences preferences) {
         return null;
     }
 }

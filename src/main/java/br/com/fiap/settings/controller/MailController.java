@@ -8,34 +8,34 @@ import java.util.List;
 
 @RestController
 
-@RequestMapping("")
+@RequestMapping("/mail")
 
 public class MailController {
 
-    @GetMapping("/mail/{mailId}")
+    @GetMapping("/{mailId}")
     @ResponseStatus(HttpStatus.OK)
     public Mail getMail(@PathVariable Long id) {
         return null;
     }
 
-    @GetMapping("/mail")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<Mail> getMails() {
         return null;
     }
 
-    @PostMapping("/mail")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Mail registerMail(@RequestBody Mail mail) {
         return null;
     }
 
-    @DeleteMapping("/mail/{mailId}")
+    @DeleteMapping("/{mailId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteMail(@PathVariable Long id) {
     }
 
-    @PutMapping("/mail")
+    @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public Mail updateMail(@RequestBody Mail mail) {
         return null;

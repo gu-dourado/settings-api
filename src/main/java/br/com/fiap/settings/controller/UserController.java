@@ -11,27 +11,27 @@ import java.util.List;
 
 @RestController
 
-@RequestMapping("")
+@RequestMapping("/profile")
 public class UserController {
 
-    @GetMapping("/profile/{userId}")
+    @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public User getProfile(@PathVariable Long id) {
         return null;
     }
 
-    @PostMapping("/profile")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public User registerProfile(@RequestBody User user) {
         return null;
     }
 
-    @DeleteMapping("/profile/{userId}")
+    @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProfile(@PathVariable Long id) {
     }
 
-    @PutMapping("/profile")
+    @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public User updateProfile(@RequestBody User user) {
         return null;

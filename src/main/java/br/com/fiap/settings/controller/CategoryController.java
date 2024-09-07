@@ -6,28 +6,28 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 
-@RequestMapping("")
+@RequestMapping("/category")
 
 public class CategoryController {
 
-    @GetMapping("/category/{userId}")
+    @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public Category getCategory(@PathVariable Long id) {
         return null;
     }
 
-    @PostMapping("/category")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Category registerCategory(@RequestBody Category category) {
         return null;
     }
 
-    @DeleteMapping("/category/{userId}")
+    @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCategory(@PathVariable Long id) {
     }
 
-    @PutMapping("/category")
+    @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public Category updateCategory(@RequestBody Category category) {
         return null;
