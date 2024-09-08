@@ -5,7 +5,6 @@ import lombok.*;
 
 @Entity
 @Table(name = "tbl_mails")
-@PrimaryKeyJoinColumn(name = "user_id")
 @Data
 @NoArgsConstructor
 public class Mail {
@@ -13,8 +12,17 @@ public class Mail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     private Long senderId;
-    private Long categoriesId;
+
+    @OneToOne
+    @JoinColumn(name = "categories_id")
+    private Category category;
+
     private String title;
     private String body;
 }
+

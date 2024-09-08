@@ -3,6 +3,9 @@ package br.com.fiap.settings.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tbl_users")
 @Data
@@ -12,8 +15,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name, mailAddress, password;
-    private Long preferencesId;
-    private Long mailsId;
+    private String name;
+    private String email;
+    private String password;
+
+    @OneToOne
+    @JoinColumn(name = "preferences_id")
+    private Preferences preferences;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Mail> mails = new ArrayList<>();
 }
+
 

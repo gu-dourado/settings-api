@@ -5,7 +5,6 @@ import lombok.*;
 
 @Entity
 @Table(name = "tbl_preferences")
-@PrimaryKeyJoinColumn(name = "user_id")
 @Data
 @NoArgsConstructor
 public class Preferences {
@@ -13,6 +12,12 @@ public class Preferences {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long categoriesId;
+    @OneToOne(mappedBy = "preferences")
+    private User user;
+
+    @OneToOne
+    @JoinColumn(name = "categories_id")
+    private Category category;
+
     private String theme;
 }
