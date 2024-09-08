@@ -3,13 +3,13 @@ package br.com.fiap.settings.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
+@Entity
+@Table(name = "tbl_categories")
+@Data
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
 public class Category {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Boolean all;
