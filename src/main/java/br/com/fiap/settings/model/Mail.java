@@ -3,9 +3,6 @@ package br.com.fiap.settings.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-import java.util.List;
-
 @Entity
 @Table(name = "tbl_mails")
 @PrimaryKeyJoinColumn(name = "user_id")

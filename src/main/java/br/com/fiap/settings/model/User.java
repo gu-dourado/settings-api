@@ -3,8 +3,6 @@ package br.com.fiap.settings.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "tbl_users")
 @Data
