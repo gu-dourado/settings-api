@@ -1,4 +1,7 @@
 package br.com.fiap.settings.dto;
 
-public record UserResponse() {
+public record UserResponse(
+        String name,
+        String mailAdress
+) {
 }
