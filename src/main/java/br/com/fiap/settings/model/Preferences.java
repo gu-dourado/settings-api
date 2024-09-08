@@ -5,15 +5,16 @@ import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Entity
+@Table(name = "tbl_preferences")
+@PrimaryKeyJoinColumn(name = "user_id")
+@Data
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
 public class Preferences {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private List<Category> categories;
+    private Long categoriesId;
     private String theme;
 }

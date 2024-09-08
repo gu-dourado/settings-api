@@ -5,17 +5,17 @@ import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Entity
+@Table(name = "tbl_users")
+@Data
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name, mailAddress, password;
-    private Preferences preferences;
-    private List<Mail> mails;
+    private Long preferencesId;
+    private Long mailsId;
 }
 

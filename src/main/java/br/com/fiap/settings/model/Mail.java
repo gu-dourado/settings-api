@@ -6,17 +6,18 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Getter
-@Setter
+@Entity
+@Table(name = "tbl_mails")
+@PrimaryKeyJoinColumn(name = "user_id")
+@Data
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
 public class Mail {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private User sender;
-    private List<Category> categories;
+    private Long senderId;
+    private Long categoriesId;
     private String title;
     private String body;
 }
