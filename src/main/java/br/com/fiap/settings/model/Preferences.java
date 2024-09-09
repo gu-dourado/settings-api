@@ -17,7 +17,7 @@ public class Preferences {
 
     @OneToOne
     @JoinColumn(name = "categories_id")
-    private Category category;
+    private Categories categories;
 
     private String theme;
 }
