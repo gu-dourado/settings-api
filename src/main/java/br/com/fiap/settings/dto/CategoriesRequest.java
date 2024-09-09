@@ -1,6 +1,7 @@
 package br.com.fiap.settings.dto;
 
-public record CategoryResponse(
+public record CategoriesRequest(
+        Long id,
         Boolean all,
         Boolean education,
         Boolean family,
