@@ -16,6 +16,8 @@ public class User {
     private Long id;
 
     private String name;
+
+    @Column(name = "mail_address")
     private String mailAddress;
     private String password;
 
@@ -23,8 +25,11 @@ public class User {
     @JoinColumn(name = "preferences_id")
     private Preferences preferences;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Mail> mails = new ArrayList<>();
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Mail> receivedMails = new ArrayList<>();
+
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Mail> sentMails = new ArrayList<>();
 }
 
 
