@@ -1,6 +1,6 @@
 package br.com.fiap.settings.controller;
 
-import br.com.fiap.settings.model.Category;
+import br.com.fiap.settings.model.Categories;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/category")
 
-public class CategoryController {
+public class CategoriesController {
 
     @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public Category getCategory(@PathVariable Long id) {
+    public Categories getCategory(@PathVariable Long id) {
         return null;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Category registerCategory(@RequestBody Category category) {
+    public Categories registerCategory(@RequestBody Categories category) {
         return null;
     }
 
@@ -29,7 +29,7 @@ public class CategoryController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public Category updateCategory(@RequestBody Category category) {
+    public Categories updateCategory(@RequestBody Categories category) {
         return null;
     }
 }
