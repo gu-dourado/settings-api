@@ -1,10 +1,9 @@
 package br.com.fiap.settings.dto;
 
+import br.com.fiap.settings.model.Categories;
+
 public record MailRequest(
-        Long id,
-        Long senderId,
-        String user,
-        String category,
+        Categories categories,
         String title,
         String body
 ) {
