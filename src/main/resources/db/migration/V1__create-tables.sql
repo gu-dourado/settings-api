@@ -1,11 +1,11 @@
 CREATE TABLE tbl_categories (
                                 id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                allCategories TINYINT(1),
-                                education TINYINT(1),
-                                family TINYINT(1),
-                                important TINYINT(1),
-                                advertising TINYINT(1),
-                                social TINYINT(1)
+                                all_categories BOOLEAN,
+                                education BOOLEAN,
+                                family BOOLEAN,
+                                important BOOLEAN,
+                                advertising BOOLEAN,
+                                social BOOLEAN
 );
 
 CREATE TABLE tbl_preferences (
@@ -17,20 +17,21 @@ CREATE TABLE tbl_preferences (
 
 CREATE TABLE tbl_users (
                            id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                           name VARCHAR(255),
-                           email VARCHAR(255),
-                           password VARCHAR(255),
+                           name VARCHAR(255) NOT NULL,
+                           mail_address VARCHAR(255) NOT NULL,
+                           password VARCHAR(255) NOT NULL,
                            preferences_id BIGINT,
-                           CONSTRAINT fk_user_preferences FOREIGN KEY (preferences_id) REFERENCES tbl_preferences(id)
+                           FOREIGN KEY (preferences_id) REFERENCES tbl_preferences(id)
 );
 
 CREATE TABLE tbl_mails (
                            id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                           senderId BIGINT,
+                           receiver_id BIGINT,
+                           sender_id BIGINT,
+                           categories_id BIGINT,
                            title VARCHAR(255),
                            body TEXT,
-                           user_id BIGINT,
-                           categories_id BIGINT,
-                           CONSTRAINT fk_mail_user FOREIGN KEY (user_id) REFERENCES tbl_users(id),
-                           CONSTRAINT fk_mail_categories FOREIGN KEY (categories_id) REFERENCES tbl_categories(id)
+                           CONSTRAINT fk_mails_receiver FOREIGN KEY (receiver_id) REFERENCES tbl_users(id),
+                           CONSTRAINT fk_mails_sender FOREIGN KEY (sender_id) REFERENCES tbl_users(id),
+                           CONSTRAINT fk_mails_categories FOREIGN KEY (categories_id) REFERENCES tbl_categories(id)
 );
