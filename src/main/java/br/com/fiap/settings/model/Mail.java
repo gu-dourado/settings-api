@@ -13,14 +13,16 @@ public class Mail {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "receiver_id")
+    private User receiver;
 
-    private Long senderId;
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
+    private User sender;
 
     @OneToOne
     @JoinColumn(name = "categories_id")
-    private Category category;
+    private Categories categories;
 
     private String title;
     private String body;

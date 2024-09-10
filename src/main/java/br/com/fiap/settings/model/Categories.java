@@ -7,12 +7,13 @@ import lombok.*;
 @Table(name = "tbl_categories")
 @Data
 @NoArgsConstructor
-public class Category {
+public class Categories {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Boolean all;
+    @Column(name = "all_categories")
+    private Boolean allCategories;
     private Boolean education;
     private Boolean family;
     private Boolean important;
