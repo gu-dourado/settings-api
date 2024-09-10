@@ -1,8 +1,12 @@
 package br.com.fiap.settings.service;
 
 import br.com.fiap.settings.dto.MailResponse;
+import br.com.fiap.settings.dto.UserRequest;
+import br.com.fiap.settings.dto.UserResponse;
+import br.com.fiap.settings.model.Mail;
 import br.com.fiap.settings.model.User;
 import br.com.fiap.settings.repository.UserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,29 +18,36 @@ public class UserService {
     @Autowired
     private MailService mailService;
 
-
     @Autowired
     private UserRepository userRepository;
 
-    public User save(User user) {
-        return userRepository.save(user);
-    }
+    public UserResponse save(UserRequest userRequest) {
+        User userToSave = convertToUser(userRequest);
+        User savedUser = userRepository.save(userToSave);
 
-    public User update(User user) {
-        User targetUser = findById(user.getId());
-        return userRepository.save(targetUser);
+        return new UserResponse(savedUser);
     }
 
     public void delete(Long userId) {
         userRepository.deleteById(userId);
     }
 
-    public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Pessoa não encontrada."));
+    public UserResponse update(User user) {
+        User targetUser = findById(user.getId());
+        User updatedUser = userRepository.save(targetUser);
+
+        return new UserResponse(updatedUser);
     }
 
-//    public Page<MailResponse> findAllMails(Pageable pageable, Long userId) {
-//        return mailService.findAllByUserId(pageable, userId);
-//    }
+    public User findById(Long id) {
+      return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Pessoa não encontrada."));
+    }
+
+    private User convertToUser(UserRequest userRequest) {
+        User user = new User();
+        BeanUtils.copyProperties(userRequest, user);
+
+        return user;
+    }
 }
 
