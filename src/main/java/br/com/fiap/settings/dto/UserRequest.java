@@ -3,8 +3,8 @@ package br.com.fiap.settings.dto;
 public record UserRequest(
         Long id,
         String name,
-        String mailAdress,
+        String mailAddress,
         String password,
-        String preferences
+        PreferencesRequest preferences
 ) {
 }

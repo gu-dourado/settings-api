@@ -18,7 +18,7 @@ CREATE TABLE tbl_preferences (
 CREATE TABLE tbl_users (
                            id BIGINT AUTO_INCREMENT PRIMARY KEY,
                            name VARCHAR(255) NOT NULL,
-                           mail_address VARCHAR(255) NOT NULL,
+                           mail_address VARCHAR(255) NOT NULL UNIQUE,
                            password VARCHAR(255) NOT NULL,
                            preferences_id BIGINT,
                            FOREIGN KEY (preferences_id) REFERENCES tbl_preferences(id)

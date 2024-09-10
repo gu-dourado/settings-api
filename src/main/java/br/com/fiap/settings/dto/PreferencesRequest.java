@@ -1,9 +1,10 @@
 package br.com.fiap.settings.dto;
 
+import br.com.fiap.settings.model.Categories;
+
 public record PreferencesRequest(
         Long id,
-        String user,
-        String category,
+        CategoriesRequest categories,
         String theme
 ) {
 }
