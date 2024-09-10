@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import br.com.fiap.settings.dto.PreferencesRequest;
+import br.com.fiap.settings.model.Preferences;
+
 
 @Service
 public class UserService {
@@ -19,10 +22,20 @@ public class UserService {
     private MailService mailService;
 
     @Autowired
+    private PreferencesService preferencesService;
+
+    @Autowired
     private UserRepository userRepository;
 
     public UserResponse save(UserRequest userRequest) {
         User userToSave = convertToUser(userRequest);
+
+        if (userRequest.preferences() != null) {
+            Preferences preferences = convertToPreferences(userRequest.preferences());
+            preferences.setUser(userToSave);
+            userToSave.setPreferences(preferences);
+        }
+
         User savedUser = userRepository.save(userToSave);
 
         return new UserResponse(savedUser);
@@ -48,6 +61,11 @@ public class UserService {
         BeanUtils.copyProperties(userRequest, user);
 
         return user;
+    }
+
+    private Preferences convertToPreferences(PreferencesRequest preferencesRequest) {
+        Preferences preferences = new Preferences();
+        return preferences;
     }
 }
 
