@@ -23,7 +23,7 @@ public class UserController {
     @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public UserResponse getProfile(@PathVariable Long userId) {
-        return new UserResponse(userService.findById(userId));
+        return userService.findById(userId);
     }
 
     @PostMapping
@@ -40,7 +40,7 @@ public class UserController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public User updateProfile(@RequestBody User user) {
-        return null;
+    public UserResponse updateProfile(@RequestBody UserRequest userRequest) {
+        return userService.update(userRequest);
     }
 }

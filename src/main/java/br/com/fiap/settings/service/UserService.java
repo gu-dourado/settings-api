@@ -1,9 +1,9 @@
 package br.com.fiap.settings.service;
 
-import br.com.fiap.settings.dto.MailResponse;
-import br.com.fiap.settings.dto.UserRequest;
-import br.com.fiap.settings.dto.UserResponse;
+import br.com.fiap.settings.dto.*;
+import br.com.fiap.settings.model.Categories;
 import br.com.fiap.settings.model.Mail;
+import br.com.fiap.settings.model.Preferences;
 import br.com.fiap.settings.model.User;
 import br.com.fiap.settings.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
@@ -19,10 +19,18 @@ public class UserService {
     private MailService mailService;
 
     @Autowired
+    private PreferencesService preferencesService;
+
+    @Autowired
     private UserRepository userRepository;
 
     public UserResponse save(UserRequest userRequest) {
         User userToSave = convertToUser(userRequest);
+
+        PreferencesResponse savedPreferences = preferencesService.save(userRequest.preferences());
+
+        userToSave.setPreferences(preferencesService.convertPreferencesResponseToPreferences(savedPreferences));
+
         User savedUser = userRepository.save(userToSave);
 
         return new UserResponse(savedUser);
@@ -32,15 +40,17 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
-    public UserResponse update(User user) {
-        User targetUser = findById(user.getId());
-        User updatedUser = userRepository.save(targetUser);
+    public UserResponse update(UserRequest userRequest) {
+        userRepository.findById(userRequest.id()).orElseThrow(() -> new RuntimeException("Pessoa não encontrada."));
+
+        User userToUpdate = convertToUser(userRequest);
+        User updatedUser = userRepository.save(userToUpdate);
 
         return new UserResponse(updatedUser);
     }
 
-    public User findById(Long id) {
-      return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Pessoa não encontrada."));
+    public UserResponse findById(Long id) {
+      return new UserResponse(userRepository.findById(id).orElseThrow(() -> new RuntimeException("Pessoa não encontrada.")));
     }
 
     private User convertToUser(UserRequest userRequest) {
