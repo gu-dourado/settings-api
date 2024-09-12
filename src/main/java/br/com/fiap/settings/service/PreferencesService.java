@@ -4,6 +4,7 @@ import br.com.fiap.settings.dto.*;
 import br.com.fiap.settings.model.Categories;
 import br.com.fiap.settings.model.Preferences;
 import br.com.fiap.settings.model.User;
+import br.com.fiap.settings.repository.CategoriesRepository;
 import br.com.fiap.settings.repository.PreferencesRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,19 @@ public class PreferencesService {
 
   public void delete(Long preferencesId) {
     preferencesRepository.deleteById(preferencesId);
+  }
+
+  public PreferencesResponse update(PreferencesRequest preferencesRequest) {
+    preferencesRepository.findById(preferencesRequest.id()).orElseThrow(() -> new RuntimeException("Preferências não encontradas."));
+
+    Preferences preferencesToUpdate = convertPreferencesRequestToPreferences(preferencesRequest);
+    Preferences updatedPreferences = preferencesRepository.save(preferencesToUpdate);
+
+    return new PreferencesResponse(updatedPreferences);
+  }
+
+  public PreferencesResponse findById(Long id) {
+    return new PreferencesResponse(preferencesRepository.findById(id).orElseThrow(() -> new RuntimeException("Preferências não encontradas.")));
   }
 
   private Preferences convertPreferencesRequestToPreferences(PreferencesRequest preferencesRequest) {

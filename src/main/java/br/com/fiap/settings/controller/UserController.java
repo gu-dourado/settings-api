@@ -20,9 +20,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{userId}")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public UserResponse getProfile(@PathVariable Long userId) {
+    public UserResponse getProfile(@RequestHeader("User-Id") Long userId) {
         return userService.findById(userId);
     }
 
@@ -32,9 +32,9 @@ public class UserController {
         return userService.save(userRequest);
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProfile(@PathVariable Long userId) {
+    public void deleteProfile(@RequestHeader Long userId) {
         userService.delete(userId);
     }
 

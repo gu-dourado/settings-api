@@ -1,7 +1,11 @@
 package br.com.fiap.settings.controller;
 
+import br.com.fiap.settings.dto.PreferencesResponse;
 import br.com.fiap.settings.model.Preferences;
 import br.com.fiap.settings.model.User;
+import br.com.fiap.settings.service.PreferencesService;
+import br.com.fiap.settings.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,15 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 public class PreferencesController {
 
-    @GetMapping("/{preferencesId}")
+    @Autowired
+    private PreferencesService preferencesService;
+
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Preferences getPreferences(@PathVariable Long id) {
-        return null;
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Preferences registerPreferences(@RequestBody Preferences preferences) {
         return null;
     }
 

@@ -27,6 +27,10 @@ public class CategoriesService {
     categoriesRepository.deleteById(categoryId);
   }
 
+  public CategoriesResponse findById(Long id) {
+    return new CategoriesResponse(categoriesRepository.findById(id).orElseThrow(() -> new RuntimeException("Categorias não encontradas.")));
+  }
+
   public Categories convertCategoriesRequestToCategories(CategoriesRequest categoriesRequest) {
     Categories categories = new Categories();
     BeanUtils.copyProperties(categoriesRequest, categories);
