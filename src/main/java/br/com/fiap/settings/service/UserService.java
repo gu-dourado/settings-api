@@ -27,14 +27,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserRegisterResponse save(UserRequest userRequest) {
+    public UserRegisterResponse save(UserRequest userRequest, Long preferencesId) {
         User userToSave = convertUserRequestToUser(userRequest);
 
-        PreferencesResponse savedPreferences = preferencesService.save(userRequest.preferences());
-        userToSave.setPreferences(preferencesService.convertPreferencesResponseToPreferences(savedPreferences));
-
-        Categories savedCategories = categoriesService.convertCategoriesResponseToCategories(categoriesService.findById(savedPreferences.categoriesId()));
-        userToSave.getPreferences().setCategories(savedCategories);
+//   TA AQUI     PreferencesResponse savedPreferences = preferencesService.findById(preferencesId);
+//
+//        userToSave.setPreferences(preferencesService.convertPreferencesResponseToPreferences(savedPreferences));
 
         User savedUser = userRepository.save(userToSave);
 

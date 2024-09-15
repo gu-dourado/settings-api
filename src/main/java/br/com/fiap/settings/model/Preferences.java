@@ -15,7 +15,7 @@ public class Preferences {
     @OneToOne(mappedBy = "preferences")
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "categories_id")
     private Categories categories;
 
