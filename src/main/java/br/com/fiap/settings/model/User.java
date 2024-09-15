@@ -21,15 +21,9 @@ public class User {
     private String mailAddress;
     private String password;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "preferences_id")
     private Preferences preferences;
-
-    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Mail> receivedMails = new ArrayList<>();
-
-    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Mail> sentMails = new ArrayList<>();
 }
 
 

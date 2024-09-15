@@ -4,12 +4,10 @@ import br.com.fiap.settings.model.Preferences;
 import br.com.fiap.settings.model.User;
 
 public record UserResponse(
-        Long id,
         String name,
-        String mailAddress,
-        Long preferencesId
+        String mailAddress
 ) {
   public UserResponse(User user) {
-    this(user.getId(), user.getName(), user.getMailAddress(), user.getPreferences().getId());
+    this(user.getName(), user.getMailAddress());
   }
 }

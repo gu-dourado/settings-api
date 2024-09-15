@@ -1,0 +1,34 @@
+[
+  {
+    "name":"João Silva",
+    "mailAddress":"joaosilva@mail.com",
+    "password": "joaosilva123",
+    "preferences": {
+      "categories": {
+        "allCategories": "false",
+        "education": "false",
+        "family": "false",
+        "important": "false",
+        "advertising": "false",
+        "social": "false"
+      },
+      "theme": "light"
+    }
+  },
+  {
+    "name":"Manoela Pereira",
+    "mailAddress":"manoelapereira@mail.com",
+    "password": "manoelapereira123",
+    "preferences": {
+      "categories": {
+        "allCategories": "false",
+        "education": "false",
+        "family": "false",
+        "important": "false",
+        "advertising": "false",
+        "social": "false"
+      },
+      "theme": "light"
+    }
+  }
+]

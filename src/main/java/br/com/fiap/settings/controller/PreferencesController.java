@@ -1,5 +1,6 @@
 package br.com.fiap.settings.controller;
 
+import br.com.fiap.settings.dto.PreferencesRequest;
 import br.com.fiap.settings.dto.PreferencesResponse;
 import br.com.fiap.settings.model.Preferences;
 import br.com.fiap.settings.model.User;
@@ -20,18 +21,13 @@ public class PreferencesController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Preferences getPreferences(@PathVariable Long id) {
-        return null;
+    public PreferencesResponse getPreferences(@RequestHeader("Preferences-Id") Long userId) {
+        return preferencesService.findById(userId);
     }
 
-    @DeleteMapping("/{preferencesId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePreferences(@PathVariable Long id) {
-    }
-
-    @PutMapping
-    @ResponseStatus(HttpStatus.OK)
-    public Preferences updatePreferences(@RequestBody Preferences preferences) {
-        return null;
-    }
+//    @PutMapping
+//    @ResponseStatus(HttpStatus.OK)
+//    public PreferencesResponse updatePreferences(@RequestBody PreferencesRequest preferencesRequest) {
+//        return preferencesService.update(preferencesRequest);
+//    }
 }

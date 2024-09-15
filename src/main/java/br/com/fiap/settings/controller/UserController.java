@@ -1,7 +1,6 @@
 package br.com.fiap.settings.controller;
 
-import br.com.fiap.settings.dto.UserRequest;
-import br.com.fiap.settings.dto.UserResponse;
+import br.com.fiap.settings.dto.*;
 import br.com.fiap.settings.model.Mail;
 import br.com.fiap.settings.model.Preferences;
 import br.com.fiap.settings.model.User;
@@ -28,19 +27,19 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponse registerProfile(@RequestBody UserRequest userRequest) {
+    public UserRegisterResponse registerProfile(@RequestBody UserRequest userRequest) {
         return userService.save(userRequest);
     }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProfile(@RequestHeader Long userId) {
+    public void deleteProfile(@RequestHeader("User-Id") Long userId) {
         userService.delete(userId);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public UserResponse updateProfile(@RequestBody UserRequest userRequest) {
-        return userService.update(userRequest);
+    public UserResponse updateProfile(@RequestBody UserRequest userRequest, @RequestHeader("User-Id") Long userId, @RequestHeader("Preferences-Id") Long preferencesId) {
+        return userService.update(userRequest, userId, preferencesId);
     }
 }

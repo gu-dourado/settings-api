@@ -20,7 +20,7 @@ public class Mail {
     @JoinColumn(name = "sender_id")
     private User sender;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "categories_id")
     private Categories categories;
 

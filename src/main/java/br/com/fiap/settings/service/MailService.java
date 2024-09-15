@@ -2,6 +2,7 @@ package br.com.fiap.settings.service;
 
 import br.com.fiap.settings.dto.MailRequest;
 import br.com.fiap.settings.dto.MailResponse;
+import br.com.fiap.settings.dto.UserResponse;
 import br.com.fiap.settings.model.Mail;
 import br.com.fiap.settings.model.User;
 import br.com.fiap.settings.repository.MailRepository;
@@ -17,11 +18,7 @@ public class MailService {
   @Autowired
   private MailRepository mailRepository;
 
-  public MailResponse save(MailRequest mailRequest, User receiver, User sender) {
-    Mail mailToSave = convertToMail(mailRequest);
-    mailToSave.setReceiver(receiver);
-    mailToSave.setSender(sender);
-
+  public MailResponse save(Mail mailToSave) {
     Mail savedMail = mailRepository.save(mailToSave);
 
     return new MailResponse(savedMail);
@@ -32,17 +29,17 @@ public class MailService {
   }
 
   public MailResponse findById(Long mailId) {
-    return convertToMailResponse(mailRepository.findById(mailId).orElseThrow(() -> new RuntimeException("Mail não encontrado.")));
+    return new MailResponse(mailRepository.findById(mailId).orElseThrow(() -> new RuntimeException("Mail não encontrado.")));
   }
 
-  private Mail convertToMail(MailRequest mailRequest) {
+  public Page<MailResponse> findAllByReceiverId(Pageable pageable, Long receiverId) {
+    return mailRepository.findAllByReceiverId(pageable, receiverId);
+  }
+
+  public Mail convertMailRequestToMail(MailRequest mailRequest) {
     Mail mail = new Mail();
     BeanUtils.copyProperties(mailRequest, mail);
 
     return mail;
-  }
-
-  private MailResponse convertToMailResponse(Mail mail) {
-    return new MailResponse(mail.getSender(), mail.getCategories(), mail.getTitle(), mail.getBody());
   }
 }
