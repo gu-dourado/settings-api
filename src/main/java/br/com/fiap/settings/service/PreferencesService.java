@@ -35,10 +35,16 @@ public class PreferencesService {
     preferencesRepository.deleteById(preferencesId);
   }
 
-  public PreferencesResponse update(PreferencesRequest preferencesRequest) {
-    preferencesRepository.findById(preferencesRequest.id()).orElseThrow(() -> new RuntimeException("Preferências não encontradas."));
+  public PreferencesResponse update(PreferencesRequest preferencesRequest, Long id) {
+    preferencesRepository.findById(id).orElseThrow(() -> new RuntimeException("Pessoa não encontrada."));
 
     Preferences preferencesToUpdate = convertPreferencesRequestToPreferences(preferencesRequest);
+
+    preferencesToUpdate.setId(id);
+    preferencesToUpdate.setCategories(categoriesService.convertCategoriesRequestToCategories(preferencesRequest.categories()));
+
+    categoriesService.update(preferencesRequest.categories());
+
     Preferences updatedPreferences = preferencesRepository.save(preferencesToUpdate);
 
     return new PreferencesResponse(updatedPreferences);
@@ -48,7 +54,7 @@ public class PreferencesService {
     return new PreferencesResponse(preferencesRepository.findById(id).orElseThrow(() -> new RuntimeException("Preferências não encontradas.")));
   }
 
-  private Preferences convertPreferencesRequestToPreferences(PreferencesRequest preferencesRequest) {
+  public Preferences convertPreferencesRequestToPreferences(PreferencesRequest preferencesRequest) {
     Preferences preferences = new Preferences();
     BeanUtils.copyProperties(preferencesRequest, preferences);
 

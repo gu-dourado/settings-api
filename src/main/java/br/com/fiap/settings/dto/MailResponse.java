@@ -5,12 +5,12 @@ import br.com.fiap.settings.model.Mail;
 import br.com.fiap.settings.model.User;
 
 public record MailResponse (
-        User sender,
-        Categories categories,
+        String senderName,
+        Long categoriesId,
         String title,
         String body
 ) {
   public MailResponse(Mail mail) {
-    this(mail.getSender(), mail.getCategories(), mail.getTitle(), mail.getBody());
+    this(mail.getSender().getName(), mail.getCategories().getId(), mail.getTitle(), mail.getBody());
   }
 }

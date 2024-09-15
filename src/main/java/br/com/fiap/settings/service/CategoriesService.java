@@ -27,6 +27,15 @@ public class CategoriesService {
     categoriesRepository.deleteById(categoryId);
   }
 
+  public CategoriesResponse update(CategoriesRequest categoriesRequest) {
+    categoriesRepository.findById(categoriesRequest.id()).orElseThrow(() -> new RuntimeException("Categorias não encontradas."));
+
+    Categories categoriesToUpdate = convertCategoriesRequestToCategories(categoriesRequest);
+    Categories updatedCategories = categoriesRepository.save(categoriesToUpdate);
+
+    return new CategoriesResponse(updatedCategories);
+  }
+
   public CategoriesResponse findById(Long id) {
     return new CategoriesResponse(categoriesRepository.findById(id).orElseThrow(() -> new RuntimeException("Categorias não encontradas.")));
   }
