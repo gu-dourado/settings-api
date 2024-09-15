@@ -19,10 +19,10 @@ public class PreferencesService {
   @Autowired
   private CategoriesService categoriesService;
 
-  public PreferencesResponse save(PreferencesRequest preferencesRequest) {
+  public PreferencesResponse save(PreferencesRequest preferencesRequest, Long categoriesId){
     Preferences preferencesToSave = convertPreferencesRequestToPreferences(preferencesRequest);
 
-    CategoriesResponse savedCategories = categoriesService.save(preferencesRequest.categories());
+    CategoriesResponse savedCategories = categoriesService.findById(categoriesId);
 
     preferencesToSave.setCategories(categoriesService.convertCategoriesResponseToCategories(savedCategories));
 

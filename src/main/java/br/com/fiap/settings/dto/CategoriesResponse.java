@@ -4,6 +4,7 @@ import br.com.fiap.settings.model.Categories;
 import br.com.fiap.settings.model.User;
 
 public record CategoriesResponse(
+        Long id,
         Boolean allCategories,
         Boolean education,
         Boolean family,
@@ -12,6 +13,6 @@ public record CategoriesResponse(
         Boolean social
 ) {
   public CategoriesResponse(Categories categories) {
-    this(categories.getAllCategories(), categories.getEducation(), categories.getFamily(), categories.getImportant(), categories.getAdvertising(), categories.getSocial());
+    this(categories.getId(), categories.getAllCategories(), categories.getEducation(), categories.getFamily(), categories.getImportant(), categories.getAdvertising(), categories.getSocial());
   }
 }

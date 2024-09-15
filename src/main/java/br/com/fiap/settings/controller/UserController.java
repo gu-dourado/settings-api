@@ -1,9 +1,12 @@
 package br.com.fiap.settings.controller;
 
 import br.com.fiap.settings.dto.*;
+import br.com.fiap.settings.model.Categories;
 import br.com.fiap.settings.model.Mail;
 import br.com.fiap.settings.model.Preferences;
 import br.com.fiap.settings.model.User;
+import br.com.fiap.settings.service.CategoriesService;
+import br.com.fiap.settings.service.PreferencesService;
 import br.com.fiap.settings.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +22,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PreferencesService preferencesService;
+
+    @Autowired
+    private CategoriesService categoriesService;
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public UserResponse getProfile(@RequestHeader("User-Id") Long userId) {
@@ -28,7 +37,10 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserRegisterResponse registerProfile(@RequestBody UserRequest userRequest) {
-        return userService.save(userRequest);
+        CategoriesResponse savedCategories = categoriesService.save(userRequest.preferences().categories());
+        PreferencesResponse savedPreferences = preferencesService.save(userRequest.preferences(), savedCategories.id());
+
+        return userService.save(userRequest, savedPreferences.preferenceId());
     }
 
     @DeleteMapping

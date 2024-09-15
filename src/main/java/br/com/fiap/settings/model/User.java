@@ -21,7 +21,7 @@ public class User {
     private String mailAddress;
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "preferences_id")
     private Preferences preferences;
 }
